@@ -1,6 +1,8 @@
 #include "matrix_operation.h"
 #include <immintrin.h>
 
+const int TILE_SIZE = 16;
+
 Matrix MatrixOperation::NaiveMatMul(const Matrix &A, const Matrix &B) {
 	size_t n = A.getRows();
 	size_t k = A.getCols();
@@ -9,18 +11,17 @@ Matrix MatrixOperation::NaiveMatMul(const Matrix &A, const Matrix &B) {
 	if (k != B.getRows()) {
 		throw std::invalid_argument("Matrix dimensions don't match for multiplication");
 	}
-	
-	
+
 	Matrix C(n,m);
-	
+
 	for(int i = 0; i < n ; i++) {
-		for (int j = 0 ; j< m ; j++) {
-			for(int l = 0; l < k; l++) {
-				C(i,j) += A(i,l) * B(l,j);
+		for (int j = 0 ; j < m ; j++) {
+			for(int q = 0; q < k; q++) {
+				C(i, j) += A(i, q) * B(q, j);
 			}
 		}
 	}
-	
+
 	return C;
 }
 
@@ -34,16 +35,16 @@ Matrix MatrixOperation::ReorderedMatMul(const Matrix& A, const Matrix& B) {
 		throw std::invalid_argument("Matrix dimensions don't match for multiplication");
 	}
 	
-	
 	Matrix C(n,m);
-	
+
 //----------------------------------------------------- Write your code here ----------------------------------------------------------------
     
     for (int i = 0; i < n; i++) {
-        for (int l = 0; l < k; l++) {
-            double a_val = A(i, l);
+        for (int z = 0; z < k; z++) {
+            double a_val = A(i, z);
+
             for (int j = 0; j < m; j++) {
-                C(i, j) += a_val * B(l, j);
+                C(i, j) += a_val * B(z, j);
             }
         }
     }
@@ -71,14 +72,13 @@ Matrix MatrixOperation::UnrolledMatMul(const Matrix& A, const Matrix& B) {
    
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            double sum = 0.0;
-            int l = 0;
+            double sum = 0;
 
-            for (; l + UNROLL <= k; l += UNROLL) {
-                sum += A(i, l)     * B(l, j)
-                     + A(i, l + 1) * B(l + 1, j)
-                     + A(i, l + 2) * B(l + 2, j)
-                     + A(i, l + 3) * B(l + 3, j);
+            for (int z = 0; z + UNROLL <= k; z += UNROLL) {
+                sum += A(i, z) * B(z, j)
+            		+ A(i, z + 1) * B(z + 1, j)
+                	+ A(i, z + 2) * B(z + 2, j)
+                	+ A(i, z + 3) * B(z + 3, j);
             }
 
             C(i, j) = sum;
@@ -101,24 +101,23 @@ Matrix MatrixOperation::TiledMatMul(const Matrix& A, const Matrix& B) {
     }
 
     Matrix C(n, m);
-    const int T = 32;   // tile size
-	int i_max = 0;
-	int k_max = 0;
-	int j_max = 0;
 //----------------------------------------------------- Write your code here ----------------------------------------------------------------
 
-     for (int i = 0; i < n; i += T) {
-        for (int j = 0; j < m; j += T) {
-            for (int l = 0; l < k; l += T) {
-                for (int ii = i; ii < i + T; ii++) {
-					for (int jj = j; jj < j + T; jj++) {
-						    for (int kk = l; kk < l + T; kk++) {
+     for (int i = 0; i < n; i += TILE_SIZE) {
+        for (int j = 0; j < m; j += TILE_SIZE) {
+            for (int z = 0; z < k; z += TILE_SIZE) {
+                for (int ii = i; ii < i + TILE_SIZE; ii++) {
+					for (int jj = j; jj < j + TILE_SIZE; jj++) {
+						    for (int kk = z; kk < z + TILE_SIZE; kk++) {
 								C(ii, jj) += A(ii, jj) * B(kk, jj);
 						}
 					}
-                    // for (int kk = l; kk < l + T; kk++) {
+
+					// Loop re ordering
+                    // for (int kk = z; kk < z + TILE_SIZE; kk++) {
                     //     double a_val = A(ii, kk);
-                    //     for (int jj = j; jj < j + T; jj++) {
+					//
+                    //     for (int jj = j; jj < j + TILE_SIZE; jj++) {
                     //         C(ii, jj) += a_val * B(kk, jj);
                     //     }
                     // }
@@ -145,19 +144,19 @@ Matrix MatrixOperation::VectorizedMatMul(const Matrix& A, const Matrix& B) {
     Matrix C(n, m);
 //----------------------------------------------------- Write your code here ----------------------------------------------------------------
     
-    const int VEC = 4; // 256-bit AVX = 4 doubles
+    int width = 4; // 256 bit registers = 4 doubles
 
-    for (size_t i = 0; i < n; i++) {
-        for (size_t j = 0; j + VEC <= m; j += VEC) {
-            __m256d c_vec = _mm256_setzero_pd();
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j + width <= m; j += width) {
+            __m256d c_chunk = _mm256_setzero_pd();
 
-            for (size_t l = 0; l < k; l++) {
-                __m256d a_val = _mm256_broadcast_sd(&A(i, l));
-                __m256d b_vec = _mm256_loadu_pd(&B(l, j));
-                c_vec = _mm256_add_pd(c_vec, _mm256_mul_pd(a_val, b_vec));
+            for (size_t z = 0; z < k; z++) {
+                __m256d a_chunk = _mm256_broadcast_sd(&A(i, z));
+                __m256d b_chunk = _mm256_loadu_pd(&B(z, j));
+                c_chunk = _mm256_add_pd(c_chunk, _mm256_mul_pd(a_chunk, b_chunk));
             }
 
-            _mm256_storeu_pd(&C(i, j), c_vec);
+            _mm256_storeu_pd(&C(i, j), c_chunk);
         }
     }
 
@@ -182,11 +181,10 @@ Matrix MatrixOperation::Transpose(const Matrix& A) {
 	// This is a simple implementation, more advanced techniques can be applied
 	// Write your code here and commnent the above code
 //----------------------------------------------------- Write your code here ----------------------------------------------------------------
-const int T = 32;
-	for (size_t i = 0; i < rows; i += T) {
-        for (size_t j = 0; j < cols; j += T) {
-            for (size_t ii = i; ii < i + T; ii++) {
-                for (size_t jj = j; jj < j + T; jj++) {
+	for (int i = 0; i < rows; i += TILE_SIZE) {
+        for (int j = 0; j < cols; j += TILE_SIZE) {
+            for (int ii = i; ii < i + TILE_SIZE; ii++) {
+                for (int jj = j; jj < j + TILE_SIZE; jj++) {
                     result(jj, ii) = A(ii, jj);
                 }
             }
