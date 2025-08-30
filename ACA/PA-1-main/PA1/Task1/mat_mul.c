@@ -20,7 +20,7 @@
 
 // defines
 // NOTE: you can change this value as per your requirement
-#define TILE_SIZE 32 // size of the tile for blocking
+#define TILE_SIZE 16 // size of the tile for blocking
  
 /**
  * @brief 		Performs matrix multiplication of two matrices.
@@ -32,16 +32,13 @@
 void naive_mat_mul(double *A, double *B, double *C, int size)
 {
 
-	// for (int i = 0; i < size; i++)
-	// {
-	// 	for (int j = 0; j < size; j++)
-	// 	{
-	// 		for (int k = 0; k < size; k++)
-	// 		{
-	// 			C[i * size + j] += A[i * size + k] * B[k * size + j];
-	// 		}
-	// 	}
-	// }
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			for (int k = 0; k < size; k++) {
+				C[i * size + j] += A[i * size + k] * B[k * size + j];
+			}
+		}
+	}
 }
 
 /**
@@ -57,13 +54,10 @@ void loop_opt_mat_mul(double *A, double *B, double *C, int size)
 
 	// Unrolling
 
-	// for (int i = 0; i < size; i++)
-	// {
-	// 	for (int j = 0; j < size; j += 8)
-	// 	{
-	// 		for (int k = 0; k < size; k += 1)
-	// 		{
-	// 			C[i * size + j + 0] += A[i * size + k] * B[k * size + j + 0];
+	// for (int i = 0; i < size; i++) {
+	// 	for (int j = 0; j < size; j += 8) {
+	// 		for (int k = 0; k < size; k += 1) {
+	// 			C[i * size + j] += A[i * size + k] * B[k * size + j];
 	// 			C[i * size + j + 1] += A[i * size + k] * B[k * size + j + 1];
 	// 			C[i * size + j + 2] += A[i * size + k] * B[k * size + j + 2];
 	// 			C[i * size + j + 3] += A[i * size + k] * B[k * size + j + 3];
@@ -75,15 +69,12 @@ void loop_opt_mat_mul(double *A, double *B, double *C, int size)
 	// 	}
 	// }
 
-	// ReOrdering
+	// Re-ordering
 
-	// 	for (int i = 0; i < size; i++)
-	// {
-	// 	for (int k = 0; k < size; k += 1)
-	// 	{
-	// 		for (int j = 0; j < size; j += 1)
-	// 		{
-	// 			C[i * size + j ] += A[i * size + k] * B[k * size + j ];
+	// for (int i = 0; i < size; i++) {
+	// 	for (int k = 0; k < size; k += 1) {
+	// 		for (int j = 0; j < size; j += 1) {
+	// 			C[i * size + j] += A[i * size + k] * B[k * size + j];
 	// 		}
 	// 	}
 	// }
@@ -105,19 +96,12 @@ void tile_mat_mul(double *A, double *B, double *C, int size, int tile_size)
 {
 	//----------------------------------------------------- Write your code here ----------------------------------------------------------------
 
-	//-------------------------------------------------------------------------------------------------------------------------------------------
-	// for (int i = 0; i < size; i += tile_size)
-	// {
-	// 	for (int j = 0; j < size; j += tile_size)
-	// 	{
-	// 		for (int k = 0; k < size; k += tile_size)
-	// 		{
-	// 			for (int ii = i; ii < i + tile_size; ii++)
-	// 			{
-	// 				for (int jj = j; jj < j + tile_size; jj++)
-	// 				{
-	// 					for (int kk = k; kk < k + tile_size; kk++)
-	// 					{
+	// for (int i = 0; i < size; i += tile_size) {
+	// 	for (int j = 0; j < size; j += tile_size) {
+	// 		for (int k = 0; k < size; k += tile_size) {
+	// 			for (int ii = i; ii < i + tile_size; ii++) {
+	// 				for (int jj = j; jj < j + tile_size; jj++) {
+	// 					for (int kk = k; kk < k + tile_size; kk++) {
 	// 						C[ii * size + jj] += A[ii * size + kk] * B[kk * size + jj];
 	// 					}
 	// 				}
@@ -126,6 +110,7 @@ void tile_mat_mul(double *A, double *B, double *C, int size, int tile_size)
 	// 	}
 	// }
 	
+	//-------------------------------------------------------------------------------------------------------------------------------------------
 }
 
 /**
@@ -139,39 +124,40 @@ void tile_mat_mul(double *A, double *B, double *C, int size, int tile_size)
 void simd_mat_mul(double *A, double *B, double *C, int size)
 {
 	//----------------------------------------------------- Write your code here ----------------------------------------------------------------
-	// for (int i = 0; i < size; i++) {
-	// 	for (int j = 0; j + 4 <= size; j += 4) {
-    //         __m256d c_vec = _mm256_loadu_pd(&C[i * size + j]);  
-
-    //         for (int k = 0; k < size; k++) {
-    //             __m256d a_vec = _mm256_broadcast_sd(&A[i * size + k]);   
-    //             __m256d b_vec = _mm256_loadu_pd(&B[k * size + j]);      
-    //             c_vec = _mm256_add_pd(c_vec, _mm256_mul_pd(a_vec, b_vec));
-    //         }
 	
-
-
-    //         _mm256_storeu_pd(&C[i * size + j], c_vec);
-    //     }
-	// }
-
-
-	//----------------------------------------------------- Write your code here ----------------------------------------------------------------
+	// 256 bit register
+	
 	for (int i = 0; i < size; i++) {
-		for (int j = 0; j + 2 <= size; j += 2) {
-            __m128d c_vec = _mm_loadu_pd(&C[i * size + j]);  
+		for (int j = 0; j <= size - 4; j += 4) {
+            __m256d c_chunk = _mm256_loadu_pd(&C[i * size + j]);  
 
             for (int k = 0; k < size; k++) {
-                __m128d a_vec = _mm_set1_pd(A[i * size + k]);   
-                __m128d b_vec = _mm_loadu_pd(&B[k * size + j]);       
-                c_vec = _mm_add_pd(c_vec, _mm_mul_pd(a_vec, b_vec));
+                __m256d a_chunk = _mm256_broadcast_sd(&A[i * size + k]);   
+                __m256d b_chunk = _mm256_loadu_pd(&B[k * size + j]);      
+                c_chunk = _mm256_add_pd(c_chunk, _mm256_mul_pd(a_chunk, b_chunk));
             }
 
-            _mm_storeu_pd(&C[i * size + j], c_vec);
+            _mm256_storeu_pd(&C[i * size + j], c_chunk);
         }
-		
 	}
 
+	// 128 bit register
+
+	// for (int i = 0; i < size; i++) {
+	// 	for (int j = 0; j <= size - 2; j += 2) {
+ //            __m128d c_chunk = _mm_loadu_pd(&C[i * size + j]);  
+
+ //            for (int k = 0; k < size; k++) {
+ //                __m128d a_chunk = _mm_set1_pd(A[i * size + k]);   
+ //                __m128d b_chunk = _mm_loadu_pd(&B[k * size + j]);       
+ //                c_chunk = _mm_add_pd(c_chunk, _mm_mul_pd(a_chunk, b_chunk));
+ //            }
+
+ //            _mm_storeu_pd(&C[i * size + j], c_chunk);
+ //        }
+	// }
+
+	//----------------------------------------------------- Write your code here ----------------------------------------------------------------
 }
 
 /**
@@ -187,28 +173,24 @@ void simd_mat_mul(double *A, double *B, double *C, int size)
 void combination_mat_mul(double *A, double *B, double *C, int size, int tile_size)
 {
 	//----------------------------------------------------- Write your code here ----------------------------------------------------------------
-	// for (int i = 0; i < size; i += tile_size)
-	// {
-	// 	for (int j = 0; j < size; j += tile_size)
-	// 	{
-	// 		for (int k = 0; k < size; k += tile_size)
-	// 		{
-    //             for (int ii = i; ii < i + tile_size; ii++) {
-    //                 for (int kk = k; kk < k + tile_size; kk++) {
-    //                     __m256d a_vec = _mm256_broadcast_sd(&A[ii * size + kk]);
+	for (int i = 0; i < size; i += tile_size) {
+		for (int j = 0; j < size; j += tile_size) {
+			for (int k = 0; k < size; k += tile_size) {
+                for (int ii = i; ii < i + tile_size; ii++) {
+                    for (int kk = k; kk < k + tile_size; kk++) {
+                        __m256d a_chunk = _mm256_broadcast_sd(&A[ii * size + kk]);
 
-    //                     for (int jj = j; jj + 4 <= j + tile_size; jj += 4) {
-    //                         __m256d b_vec = _mm256_loadu_pd(&B[kk * size + jj]);
-    //                         __m256d c_vec = _mm256_loadu_pd(&C[ii * size + jj]);
-    //                         c_vec = _mm256_add_pd(c_vec, _mm256_mul_pd(a_vec, b_vec));
-    //                         _mm256_storeu_pd(&C[ii * size + jj], c_vec);
-    //                     }
-    //                 }
-    //             }
-
-	// 		}
-	// 	}
-	// }
+                        for (int jj = j; jj <= j + tile_size - 4; jj += 4) {
+                            __m256d b_chunk = _mm256_loadu_pd(&B[kk * size + jj]);
+                            __m256d c_chunk = _mm256_loadu_pd(&C[ii * size + jj]);
+                            c_chunk = _mm256_add_pd(c_chunk, _mm256_mul_pd(a_chunk, b_chunk));
+                            _mm256_storeu_pd(&C[ii * size + jj], c_chunk);
+                        }
+                    }
+                }
+			}
+		}
+	}
 }
 
 // NOTE: DO NOT CHANGE ANYTHING BELOW THIS LINE
