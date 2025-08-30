@@ -1,0 +1,201 @@
+Script started on 2025-08-27 22:03:13+05:30 [TERM="xterm-256color" TTY="/dev/pts/7" COLUMNS="185" LINES="20"]
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2 ./loop 512[A]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ [K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2 ./loop 512[A]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C,ls[66@_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses ./[C[C[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C ./loop 512[K[A]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ [K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7msudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,l[27m[7ms[27m[7m_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./tiling 4096[27m[Asudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./tiling 4096[1P 4096[1P 4096[1P 4096[1P 4096[1P 4096[1P 4096s 4096i 4096m 4096d 4096[C[C[C[C[C[K[K[K[K512
+[?2004l[sudo] password for arpitmeher: 
+Normal matrix multiplication took 0 ms to execute 
+
+SIMD matrix multiplication took 334 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './simd 512':
+
+     1,522,678,298      instructions                                                            (62.02%)
+        52,159,792      L1-dcache-misses                                                        (62.30%)
+        51,147,779      cache-misses                                                            (62.59%)
+        33,686,609      l2_cache_req_stat.ls_rd_blk_c                                           (62.84%)
+        14,716,425      ls_hw_pf_dc_fills.lcl_l2                                                (62.85%)
+           109,042      ls_any_fills_from_sys.mem_io_local                                        (62.77%)
+        33,657,543      l2_cache_misses_from_dc_misses                                          (62.47%)
+            20,726      ls_hw_pf_dc_fills.mem_io_local                                          (62.17%)
+
+       0.347729353 seconds time elapsed
+
+       0.341609000 seconds user
+       0.005993000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./simd 512[K[K[K1024
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+SIMD matrix multiplication took 2160 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './simd 1024':
+
+    11,825,373,999      instructions                                                            (62.46%)
+       412,419,815      L1-dcache-misses                                                        (62.47%)
+       407,458,436      cache-misses                                                            (62.47%)
+       271,602,067      l2_cache_req_stat.ls_rd_blk_c                                           (62.51%)
+       116,329,311      ls_hw_pf_dc_fills.lcl_l2                                                (62.54%)
+         2,520,188      ls_any_fills_from_sys.mem_io_local                                        (62.56%)
+       271,588,109      l2_cache_misses_from_dc_misses                                          (62.52%)
+           999,943      ls_hw_pf_dc_fills.mem_io_local                                          (62.48%)
+
+       2.206444520 seconds time elapsed
+
+       2.185723000 seconds user
+       0.019988000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./simd 1024[K[K[K[K2048
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+SIMD matrix multiplication took 39263 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './simd 2048':
+
+    93,903,695,754      instructions                                                            (62.49%)
+     4,096,008,755      L1-dcache-misses                                                        (62.51%)
+     3,302,849,853      cache-misses                                                            (62.51%)
+     2,185,707,717      l2_cache_req_stat.ls_rd_blk_c                                           (62.51%)
+       993,061,291      ls_hw_pf_dc_fills.lcl_l2                                                (62.50%)
+     1,183,074,482      ls_any_fills_from_sys.mem_io_local                                        (62.49%)
+     2,184,269,703      l2_cache_misses_from_dc_misses                                          (62.50%)
+       790,925,908      ls_hw_pf_dc_fills.mem_io_local                                          (62.49%)
+
+      39.434853314 seconds time elapsed
+
+      39.354521000 seconds user
+       0.065977000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./simd 2048[K[K[K[K4096
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+SIMD matrix multiplication took 407970 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './simd 4096':
+
+   749,442,999,606      instructions                                                            (62.50%)
+    32,318,137,967      L1-dcache-misses                                                        (62.50%)
+    32,474,759,767      cache-misses                                                            (62.50%)
+    20,657,156,205      l2_cache_req_stat.ls_rd_blk_c                                           (62.50%)
+     4,773,608,303      ls_hw_pf_dc_fills.lcl_l2                                                (62.51%)
+    22,681,580,571      ls_any_fills_from_sys.mem_io_local                                        (62.51%)
+    20,658,610,011      l2_cache_misses_from_dc_misses                                          (62.50%)
+    13,332,622,657      ls_hw_pf_dc_fills.mem_io_local                                          (62.50%)
+
+     408.619644556 seconds time elapsed
+
+     408.290145000 seconds user
+       0.231944000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./simd 4096[K[K[K[K[K[K[K[K[Kcombination 512
+[?2004l[sudo] password for arpitmeher: 
+Normal matrix multiplication took 0 ms to execute 
+
+Combined optimization matrix multiplication took 362 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './combination 512':
+
+     2,272,256,296      instructions                                                            (62.40%)
+        37,876,599      L1-dcache-misses                                                        (62.38%)
+        41,216,255      cache-misses                                                            (62.40%)
+         1,085,146      l2_cache_req_stat.ls_rd_blk_c                                           (62.42%)
+        29,785,192      ls_hw_pf_dc_fills.lcl_l2                                                (62.48%)
+            92,926      ls_any_fills_from_sys.mem_io_local                                        (62.65%)
+         1,065,488      l2_cache_misses_from_dc_misses                                          (62.67%)
+            35,427      ls_hw_pf_dc_fills.mem_io_local                                          (62.59%)
+
+       0.375654410 seconds time elapsed
+
+       0.369438000 seconds user
+       0.005990000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./combination 512[K[K[K1024
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+Combined optimization matrix multiplication took 2161 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './combination 1024':
+
+    17,933,799,877      instructions                                                            (62.47%)
+       300,935,117      L1-dcache-misses                                                        (62.47%)
+       337,002,838      cache-misses                                                            (62.47%)
+         9,029,340      l2_cache_req_stat.ls_rd_blk_c                                           (62.48%)
+       240,031,246      ls_hw_pf_dc_fills.lcl_l2                                                (62.52%)
+           346,420      ls_any_fills_from_sys.mem_io_local                                        (62.54%)
+         8,973,750      l2_cache_misses_from_dc_misses                                          (62.54%)
+           174,483      ls_hw_pf_dc_fills.mem_io_local                                          (62.49%)
+
+       2.207535925 seconds time elapsed
+
+       2.189029000 seconds user
+       0.017992000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./combination 1024[K[K[K[K2048
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+Combined optimization matrix multiplication took 16578 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './combination 2048':
+
+   142,592,279,325      instructions                                                            (62.51%)
+     2,428,241,780      L1-dcache-misses                                                        (62.50%)
+     2,974,349,328      cache-misses                                                            (62.50%)
+       373,470,541      l2_cache_req_stat.ls_rd_blk_c                                           (62.49%)
+     1,681,705,677      ls_hw_pf_dc_fills.lcl_l2                                                (62.50%)
+        38,234,929      ls_any_fills_from_sys.mem_io_local                                        (62.50%)
+       374,511,352      l2_cache_misses_from_dc_misses                                          (62.50%)
+        29,570,909      ls_hw_pf_dc_fills.mem_io_local                                          (62.50%)
+
+      16.747153511 seconds time elapsed
+
+      16.679057000 seconds user
+       0.064996000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./combination 2048[K[K[K[K4096
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+Combined optimization matrix multiplication took 147384 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './combination 4096':
+
+ 1,136,490,047,295      instructions                                                            (62.50%)
+    20,142,943,133      L1-dcache-misses                                                        (62.50%)
+    29,130,531,042      cache-misses                                                            (62.50%)
+     8,278,500,245      l2_cache_req_stat.ls_rd_blk_c                                           (62.50%)
+     9,123,754,320      ls_hw_pf_dc_fills.lcl_l2                                                (62.51%)
+       525,412,320      ls_any_fills_from_sys.mem_io_local                                        (62.51%)
+     8,281,877,807      l2_cache_misses_from_dc_misses                                          (62.51%)
+       397,655,797      ls_hw_pf_dc_fills.mem_io_local                                          (62.50%)
+
+     148.033827248 seconds time elapsed
+
+     147.769025000 seconds user
+       0.237956000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ exit
+[?2004lexit
+
+Script done on 2025-08-27 22:29:09+05:30 [COMMAND_EXIT_CODE="0"]

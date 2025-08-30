@@ -1,0 +1,224 @@
+Script started on 2025-08-27 23:15:35+05:30 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="185" LINES="20"]
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ code .[4Plsscript ACA_assign1_tile.txt[7Pecho "Tile Size =16"sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./tiling 512
+[?2004l[sudo] password for arpitmeher: 
+Normal matrix multiplication took 0 ms to execute 
+
+Tiling matrix multiplication took 1088 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './tiling 512':
+
+     6,657,570,928      instructions                                                            (62.45%)
+       140,564,765      L1-dcache-misses                                                        (62.54%)
+       133,339,600      cache-misses                                                            (62.60%)
+         1,252,468      l2_cache_req_stat.ls_rd_blk_c                                           (62.58%)
+        78,262,483      ls_hw_pf_dc_fills.lcl_l2                                                (62.57%)
+           121,764      ls_any_fills_from_sys.mem_io_local                                        (62.50%)
+         1,234,904      l2_cache_misses_from_dc_misses                                          (62.41%)
+            75,411      ls_hw_pf_dc_fills.mem_io_local                                          (62.35%)
+
+       1.107656066 seconds time elapsed
+
+       1.098713000 seconds user
+       0.010015000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./tiling 512[K[K[K1024
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+Tiling matrix multiplication took 5093 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './tiling 1024':
+
+    52,897,560,995      instructions                                                            (62.48%)
+     1,108,892,287      L1-dcache-misses                                                        (62.50%)
+       799,087,601      cache-misses                                                            (62.52%)
+        10,782,135      l2_cache_req_stat.ls_rd_blk_c                                           (62.52%)
+       658,975,338      ls_hw_pf_dc_fills.lcl_l2                                                (62.53%)
+         2,843,841      ls_any_fills_from_sys.mem_io_local                                        (62.51%)
+        10,681,564      l2_cache_misses_from_dc_misses                                          (62.49%)
+         2,493,115      ls_hw_pf_dc_fills.mem_io_local                                          (62.46%)
+
+       5.155740773 seconds time elapsed
+
+       5.133664000 seconds user
+       0.026023000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./tiling 1024[K[K[K[K2048
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+Tiling matrix multiplication took 41417 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './tiling 2048':
+
+   421,981,627,755      instructions                                                            (62.50%)
+    13,762,836,470      L1-dcache-misses                                                        (62.50%)
+    13,878,152,616      cache-misses                                                            (62.51%)
+       174,297,123      l2_cache_req_stat.ls_rd_blk_c                                           (62.51%)
+     8,099,682,071      ls_hw_pf_dc_fills.lcl_l2                                                (62.51%)
+        36,919,004      ls_any_fills_from_sys.mem_io_local                                        (62.50%)
+       174,632,891      l2_cache_misses_from_dc_misses                                          (62.50%)
+        36,013,090      ls_hw_pf_dc_fills.mem_io_local                                          (62.50%)
+
+      41.640954191 seconds time elapsed
+
+      41.554665000 seconds user
+       0.103041000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./tiling 20481024[1P512[Acode .[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Plscode .sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./tiling 51210242048[A[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ct[Ksudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./tiling 20481024[1P512
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+Tiling matrix multiplication took 1062 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './tiling 512':
+
+     6,590,722,512      instructions                                                            (62.51%)
+       159,242,144      L1-dcache-misses                                                        (62.56%)
+       135,871,333      cache-misses                                                            (62.52%)
+         1,079,693      l2_cache_req_stat.ls_rd_blk_c                                           (62.52%)
+       102,572,080      ls_hw_pf_dc_fills.lcl_l2                                                (62.53%)
+            85,079      ls_any_fills_from_sys.mem_io_local                                        (62.47%)
+         1,042,981      l2_cache_misses_from_dc_misses                                          (62.43%)
+            38,319      ls_hw_pf_dc_fills.mem_io_local                                          (62.45%)
+
+       1.082429364 seconds time elapsed
+
+       1.070505000 seconds user
+       0.012005000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./tiling 512[K[K[K0[K1024
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+Tiling matrix multiplication took 4911 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './tiling 1024':
+
+    52,398,277,143      instructions                                                            (62.46%)
+     1,267,734,318      L1-dcache-misses                                                        (62.48%)
+       655,961,259      cache-misses                                                            (62.50%)
+        12,033,487      l2_cache_req_stat.ls_rd_blk_c                                           (62.54%)
+       892,682,979      ls_hw_pf_dc_fills.lcl_l2                                                (62.54%)
+         1,304,770      ls_any_fills_from_sys.mem_io_local                                        (62.53%)
+        11,910,203      l2_cache_misses_from_dc_misses                                          (62.49%)
+         1,095,604      ls_hw_pf_dc_fills.mem_io_local                                          (62.46%)
+
+       4.972792856 seconds time elapsed
+
+       4.949012000 seconds user
+       0.025010000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./tiling 1024[K[K[K[K2048
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+Tiling matrix multiplication took 39764 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './tiling 2048':
+
+   417,989,316,169      instructions                                                            (62.50%)
+    15,969,390,487      L1-dcache-misses                                                        (62.50%)
+    11,610,427,268      cache-misses                                                            (62.49%)
+       105,679,921      l2_cache_req_stat.ls_rd_blk_c                                           (62.49%)
+     9,670,609,448      ls_hw_pf_dc_fills.lcl_l2                                                (62.50%)
+        12,628,093      ls_any_fills_from_sys.mem_io_local                                        (62.50%)
+       105,480,539      l2_cache_misses_from_dc_misses                                          (62.51%)
+        11,864,286      ls_hw_pf_dc_fills.mem_io_local                                          (62.51%)
+
+      39.991951315 seconds time elapsed
+
+      39.916316000 seconds user
+       0.089031000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./tiling 20481024[1P512
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+Tiling matrix multiplication took 1100 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './tiling 512':
+
+     6,548,301,563      instructions                                                            (62.45%)
+       142,735,124      L1-dcache-misses                                                        (62.44%)
+        78,489,307      cache-misses                                                            (62.44%)
+         1,475,684      l2_cache_req_stat.ls_rd_blk_c                                           (62.44%)
+        92,063,742      ls_hw_pf_dc_fills.lcl_l2                                                (62.49%)
+           107,812      ls_any_fills_from_sys.mem_io_local                                        (62.59%)
+         1,458,456      l2_cache_misses_from_dc_misses                                          (62.59%)
+            50,213      ls_hw_pf_dc_fills.mem_io_local                                          (62.55%)
+
+       1.120072227 seconds time elapsed
+
+       1.104262000 seconds user
+       0.016003000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./tiling 512[K[K[K1024
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+Tiling matrix multiplication took 5290 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './tiling 1024':
+
+    52,070,415,415      instructions                                                            (62.49%)
+     1,144,636,727      L1-dcache-misses                                                        (62.49%)
+       793,813,802      cache-misses                                                            (62.50%)
+        13,348,035      l2_cache_req_stat.ls_rd_blk_c                                           (62.49%)
+       754,370,079      ls_hw_pf_dc_fills.lcl_l2                                                (62.51%)
+           792,636      ls_any_fills_from_sys.mem_io_local                                        (62.52%)
+        13,466,824      l2_cache_misses_from_dc_misses                                          (62.51%)
+           531,210      ls_hw_pf_dc_fills.mem_io_local                                          (62.49%)
+
+       5.350620094 seconds time elapsed
+
+       5.321211000 seconds user
+       0.031001000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ sudo perf stat -e instructions,L1-dcache-misses,cache-misses,l2_cache_req_stat.ls_rd_blk_c,ls_hw_pf_dc_fills.lcl_l2,ls_any_fills_from_sys.mem_io_local,l2_cache_misses_from_dc_misses,ls_hw_pf_dc_fills.mem_io_local ./tiling 1024[K[K[K[K2048
+[?2004lNormal matrix multiplication took 0 ms to execute 
+
+Tiling matrix multiplication took 43495 ms to execute 
+Normalized performance: 0.000000 
+
+
+ Performance counter stats for './tiling 2048':
+
+   415,991,238,839      instructions                                                            (62.49%)
+    15,371,792,928      L1-dcache-misses                                                        (62.50%)
+     9,763,824,420      cache-misses                                                            (62.50%)
+       512,746,924      l2_cache_req_stat.ls_rd_blk_c                                           (62.50%)
+     8,356,396,828      ls_hw_pf_dc_fills.lcl_l2                                                (62.51%)
+         8,205,397      ls_any_fills_from_sys.mem_io_local                                        (62.50%)
+       511,193,320      l2_cache_misses_from_dc_misses                                          (62.50%)
+         7,476,090      ls_hw_pf_dc_fills.mem_io_local                                          (62.50%)
+
+      43.721543922 seconds time elapsed
+
+      43.661849000 seconds user
+       0.075030000 seconds sys
+
+
+[?2004h]0;arpitmeher@arpitmeher-LOQ-15ARP9: ~/ACA/PA-1-main/PA1/Task1/mat_mul[01;32marpitmeher@arpitmeher-LOQ-15ARP9[00m:[01;34m~/ACA/PA-1-main/PA1/Task1/mat_mul[00m$ exit
+[?2004lexit
+
+Script done on 2025-08-27 23:21:14+05:30 [COMMAND_EXIT_CODE="0"]
